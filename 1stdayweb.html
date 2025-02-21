@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Happy Teddy Day & Valentine's Proposal ❤️</title>
+    <style>
+        /* Previous styles remain... */
+        
+        .celebration {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
+
+        .firework {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            animation: explode 1s forwards;
+        }
+
+        @keyframes explode {
+            0% { transform: scale(1); opacity: 1; }
+            100% { transform: scale(20); opacity: 0; }
+        }
+
+        .confetti {
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            animation: confettiFall 4s linear forwards;
+        }
+
+        @keyframes confettiFall {
+            0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+
+        .floating-hearts {
+            position: absolute;
+            font-size: 30px;
+            animation: floatUp 3s ease-out forwards;
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) scale(1); opacity: 1; }
+            100% { transform: translateY(-100vh) scale(0); opacity: 0; }
+        }
+
+        .celebration-text {
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            font-size: 40px;
+            color: #ff4d94;
+            animation: celebrationText 2s infinite;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        @keyframes celebrationText {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .love-burst {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            animation: burst 1s forwards;
+        }
+
+        @keyframes burst {
+            0% { transform: scale(0); opacity: 1; }
+            100% { transform: scale(2); opacity: 0; }
+        }
+
+        .photo-frame {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            border: 10px solid white;
+            border-radius: 10px;
+            transform: rotate(-5deg);
+            box-shadow: 0 0 20px rgba(0,0,0,0.2);
+            opacity: 0;
+            transition: opacity 1s, transform 1s;
+        }
+
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .celebration-message {
+            background: rgba(255,255,255,0.9);
+            padding: 20px;
+            border-radius: 15px;
+            max-width: 80%;
+            margin: 20px auto;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 1s;
+        }
+ .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            transition: transform 1s, opacity 1s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .proposal-page {
+            transform: translateX(100%);
+            opacity: 0;
+            background: linear-gradient(45deg, #ff6b6b, #ff4d94);
+        }
+
+        .proposal-container {
+            text-align: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .heart-container {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            margin: 0 auto;
+            cursor: pointer;
+            transition: transform 0.3s;
+        }
+
+        .big-heart {
+            font-size: 150px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: heartbeat 1.5s infinite;
+        }
+
+        .proposal-text {
+            font-size: 24px;
+            color: white;
+            margin: 20px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s;
+        }
+
+        .choice-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            opacity: 0;
+            transition: opacity 0.5s;
+        }
+
+        .choice-btn {
+            padding: 15px 30px;
+            font-size: 20px;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            background: white;
+            color: #ff4d94;
+        }
+
+        .choice-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .final-message {
+            font-size: 30px;
+            color: white;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.5s;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100%;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+            100% { transform: translate(-50%, -50%) scale(1); }
+        }
+
+        .rose-petals {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+        }
+
+        .petal {
+            position: absolute;
+            font-size: 20px;
+            animation: fallPetal 3s linear;
+        }
+
+        @keyframes fallPetal {
+            0% { transform: translateY(-50px) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .move-to-proposal {
+            padding: 15px 30px;
+            font-size: 18px;
+            background: #ff4b6e;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: transform 0.3s;
+        }
+
+        .move-to-proposal:hover {
+            transform: scale(1.1);
+        }
+body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            font-family: Arial, sans-serif;
+            overflow: hidden;
+            animation: backgroundShift 15s infinite alternate;
+        }
+
+        @keyframes backgroundShift {
+            0% { background: linear-gradient(45deg, #ff9a9e, #fad0c4); }
+            50% { background: linear-gradient(45deg, #ffd1ff, #ffc8d6); }
+            100% { background: linear-gradient(45deg, #ffc3a0, #ffafbd); }
+        }
+
+        .container {
+            text-align: center;
+            position: relative;
+            padding: 20px;
+            perspective: 1000px;
+        }
+
+        .teddy-container {
+            position: relative;
+            display: inline-block;
+            animation: float 3s infinite ease-in-out;
+        }
+
+        .teddy {
+            font-size: 150px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            position: relative;
+            transform-style: preserve-3d;
+        }
+
+        .teddy::after {
+            content: '🧸';
+            position: absolute;
+            left: 0;
+            opacity: 0.3;
+            transform: translateZ(-10px);
+            filter: blur(2px);
+        }
+
+        .teddy:hover {
+            transform: scale(1.2) rotate(5deg);
+        }
+
+        .message {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            margin-top: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.8s;
+            backdrop-filter: blur(5px);
+            border: 2px solid rgba(255,255,255,0.5);
+        }
+
+        .message.show {
+            opacity: 1;
+            transform: translateY(0) rotateX(0);
+        }
+
+        .hearts {
+            position: absolute;
+            pointer-events: none;
+            width: 100%;
+            height: 100%;
+        }
+
+        .heart {
+            position: absolute;
+            font-size: 20px;
+            color: red;
+            animation: flyHeart 2s linear;
+            text-shadow: 0 0 10px rgba(255,0,0,0.3);
+        }
+
+        .name {
+            font-size: 32px;
+            color: #ff4b6e;
+            font-weight: bold;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+            margin: 15px 0;
+            animation: glow 2s infinite alternate;
+            letter-spacing: 2px;
+        }
+
+        .sparkle {
+            position: absolute;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px #ff4b6e, 0 0 10px #ff4b6e; }
+            100% { text-shadow: 0 0 15px #ff4b6e, 0 0 20px #ff4b6e; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        @keyframes flyHeart {
+            0% {
+                transform: translateY(0) translateX(0) scale(1) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-200px) translateX(var(--x)) scale(0) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        h1 {
+            color: #ff4b6e;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            margin-bottom: 30px;
+            font-size: 2.5em;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-15px); }
+            60% { transform: translateY(-7px); }
+        }
+
+        .message p {
+            color: #ff4b6e;
+            font-size: 18px;
+            margin: 15px 0;
+            transition: transform 0.3s;
+            cursor: pointer;
+        }
+
+        .message p:hover {
+            transform: scale(1.05);
+        }
+
+        .love-meter {
+            width: 200px;
+            height: 20px;
+            background: rgba(255,255,255,0.5);
+            border-radius: 10px;
+            margin: 20px auto;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .love-fill {
+            width: 0%;
+            height: 100%;
+            background: linear-gradient(90deg, #ff4b6e, #ff8fb3);
+            transition: width 0.5s;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+ <div class="container">
+        <h1>Happy Teddy Day!</h1>
+        <div class="name">Dear Noour Ji ❤️</div>
+        <div class="teddy-container">
+            <div class="teddy" onclick="showLove()">🧸</div>
+        </div>
+        <div class="hearts"></div>
+        <div class="love-meter">
+            <div class="love-fill"></div>
+        </div>
+        <div class="message">
+            <p onclick="addSparkle(this)">My dearest Noour Ji,</p>
+            <p onclick="addSparkle(this)">Just like this teddy bear, my love for you is soft, warm, and never-ending.</p>
+            <p onclick="addSparkle(this)">You make every day special, but today I want to remind you how much you mean to me.</p>
+            <p onclick="addSparkle(this)">You're the sweetest person I know, and you deserve all the love in the world.</p>
+            <p onclick="addSparkle(this)">Keep clicking the teddy to see how much I love you! ❤️</p>
+            <p onclick="addSparkle(this)">Forever Yours</p>
+        </div>
+    </div>
+      <div class="page teddy-page">
+        <!-- Previous content remains... -->
+        <!-- Add proposal button at the end of the message div -->
+        <button class="move-to-proposal" onclick="showProposal()">
+            Special Valentine's Message ❤️
+        </button>
+    </div>
+
+    <div class="page proposal-page">
+        <div class="proposal-container">
+            <div class="rose-petals"></div>
+            <div class="heart-container" onclick="showProposalText()">
+                <div class="big-heart">💝</div>
+            </div>
+            <div class="proposal-text">
+                My dearest Nour Ji,
+                <br><br>
+                Every moment with you feels like a dream come true.
+                <br>
+                Will you be my Valentine?
+            </div>
+            <div class="choice-buttons">
+                <button class="choice-btn" onclick="acceptProposal()">Yes! ❤️</button>
+                <button class="choice-btn" onclick="playfulNo()">No 😊</button>
+            </div>
+            <div class="final-message"></div>
+        </div>
+    </div>
+    <script>
+        function showProposal() {
+            document.querySelector('.teddy-page').style.transform = 'translateX(-100%)';
+            document.querySelector('.teddy-page').style.opacity = '0';
+            document.querySelector('.proposal-page').style.transform = 'translateX(0)';
+            document.querySelector('.proposal-page').style.opacity = '1';
+            createPetals();
+        }
+
+        function createPetals() {
+            const petalsContainer = document.querySelector('.rose-petals');
+            for(let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const petal = document.createElement('div');
+                    petal.className = 'petal';
+                    petal.innerHTML = '🌸';
+                    petal.style.left = Math.random() * 100 + '%';
+                    petalsContainer.appendChild(petal);
+                    setTimeout(() => petal.remove(), 3000);
+                }, i * 300);
+            }
+        }
+
+        function showProposalText() {
+            document.querySelector('.proposal-text').style.opacity = '1';
+            document.querySelector('.proposal-text').style.transform = 'translateY(0)';
+            document.querySelector('.choice-buttons').style.opacity = '1';
+        }
+
+        function acceptProposal() {
+            const finalMessage = document.querySelector('.final-message');
+            finalMessage.innerHTML = `
+                Thank you for saying Yes! ❤️<br>
+                You've made me the happiest person alive!<br>
+                I promise to love you forever and always! 💑
+            `;
+            finalMessage.style.opacity = '1';
+            document.querySelector('.proposal-text').style.opacity = '0';
+            document.querySelector('.choice-buttons').style.opacity = '0';
+            createHeartShower();
+        }
+
+        function playfulNo() {
+            const noBtn = event.target;
+            noBtn.style.position = 'absolute';
+            noBtn.style.left = Math.random() * 80 + '%';
+            noBtn.style.top = Math.random() * 80 + '%';
+        }
+
+        function createHeartShower() {
+            for(let i = 0; i < 50; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'heart';
+                    heart.innerHTML = ['❤️', '💖', '💝', '💕'][Math.floor(Math.random() * 4)];
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.top = '-20px';
+                    document.querySelector('.proposal-container').appendChild(heart);
+                    setTimeout(() => heart.remove(), 3000);
+                }, i * 100);
+            }
+        }
+
+        function acceptProposal() {
+            // Hide proposal elements
+            document.querySelector('.proposal-text').style.opacity = '0';
+            document.querySelector('.choice-buttons').style.opacity = '0';
+            document.querySelector('.heart-container').style.opacity = '0';
+
+            // Start celebration sequence
+            startCelebration();
+        }
+
+        function startCelebration() {
+            // Create celebration container
+            const celebration = document.createElement('div');
+            celebration.className = 'celebration';
+            document.body.appendChild(celebration);
+
+            // Add celebration text
+            const text = document.createElement('div');
+            text.className = 'celebration-text';
+            text.innerHTML = 'She Said YES! 💑';
+            celebration.appendChild(text);
+
+            // Start fireworks
+            createFireworks();
+            // Start confetti
+            createConfetti();
+            // Create floating hearts
+            createFloatingHearts();
+            // Show final celebration message
+            setTimeout(showFinalMessage, 2000);
+        }
+
+        function createFireworks() {
+            for(let i = 0; i < 20; i++) {
+                setTimeout(() => {
+                    const firework = document.createElement('div');
+                    firework.className = 'firework';
+                    firework.style.left = Math.random() * 100 + '%';
+                    firework.style.top = Math.random() * 100 + '%';
+                    firework.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                    document.querySelector('.celebration').appendChild(firework);
+                    setTimeout(() => firework.remove(), 1000);
+                }, i * 200);
+            }
+        }
+
+        function createConfetti() {
+            const colors = ['#ff4d94', '#ff6b6b', '#4834d4', '#fff'];
+            for(let i = 0; i < 100; i++) {
+                setTimeout(() => {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    confetti.style.left = Math.random() * 100 + '%';
+                    confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                    document.querySelector('.celebration').appendChild(confetti);
+                    setTimeout(() => confetti.remove(), 4000);
+                }, i * 50);
+            }
+        }
+
+        function createFloatingHearts() {
+            const hearts = ['❤️', '💖', '💝', '💕', '💗'];
+            for(let i = 0; i < 30; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.className = 'floating-hearts';
+                    heart.innerHTML = hearts[Math.floor(Math.random() * hearts.length)];
+                    heart.style.left = Math.random() * 100 + '%';
+                    heart.style.bottom = '0';
+                    document.querySelector('.celebration').appendChild(heart);
+                    setTimeout(() => heart.remove(), 3000);
+                }, i * 100);
+            }
+        }
+
+        function showFinalMessage() {
+            const finalMessage = document.createElement('div');
+            finalMessage.className = 'celebration-message';
+            finalMessage.innerHTML = `
+                <h2>Our Love Story Begins! 💑</h2>
+                <p>Thank you for making me the happiest person alive!</p>
+                <p>I promise to:</p>
+                <ul>
+                    <li>Love you unconditionally ❤️</li>
+                    <li>Always be there for you 🤗</li>
+                    <li>Make you smile every day 😊</li>
+                    <li>Create beautiful memories together ✨</li>
+                </ul>
+                <p>Forever Yours,<br>With all my love ❤️</p>
+            `;
+            document.querySelector('.proposal-container').appendChild(finalMessage);
+            
+            // Animate message
+            setTimeout(() => {
+                finalMessage.style.opacity = '1';
+                finalMessage.style.transform = 'translateY(0)';
+            }, 100);
+
+            // Continue celebration effects
+            setInterval(createFireworks, 2000);
+            setInterval(createFloatingHearts, 1000);
+        }
+ let loveCount = 0;
+        
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.querySelector('.message').classList.add('show');
+            }, 1000);
+        });
+
+        function showLove() {
+            const hearts = document.querySelector('.hearts');
+            for(let i = 0; i < 10; i++) {
+                createHeart(hearts);
+            }
+            
+            const teddy = document.querySelector('.teddy');
+            teddy.style.transform = 'scale(1.2) rotate(' + (Math.random() * 20 - 10) + 'deg)';
+            setTimeout(() => {
+                teddy.style.transform = 'scale(1) rotate(0deg)';
+            }, 200);
+
+            updateLoveMeter();
+        }
+
+        function updateLoveMeter() {
+            loveCount++;
+            const fill = document.querySelector('.love-fill');
+            let width = Math.min(loveCount * 5, 100);
+            fill.style.width = width + '%';
+            
+            if (width >= 100) {
+                showSpecialMessage();
+            }
+        }
+
+        function showSpecialMessage() {
+            if (!document.querySelector('.special-message')) {
+                const message = document.createElement('p');
+                message.textContent = "💖 Our love is infinite! 💖";
+                message.style.color = '#ff1493';
+                message.style.fontSize = '24px';
+                message.style.fontWeight = 'bold';
+                message.className = 'special-message';
+                document.querySelector('.message').appendChild(message);
+            }
+        }
+
+        function createHeart(container) {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = ['❤️', '💖', '💝', '💕'][Math.floor(Math.random() * 4)];
+            heart.style.left = Math.random() * 100 + '%';
+            heart.style.setProperty('--x', (Math.random() * 200 - 100) + 'px');
+            container.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 2000);
+        }
+
+        function addSparkle(element) {
+            const sparkle = document.createElement('div');
+            sparkle.className = 'sparkle';
+            sparkle.innerHTML = '✨';
+            sparkle.style.position = 'absolute';
+            sparkle.style.left = Math.random() * 100 + '%';
+            sparkle.style.top = Math.random() * 100 + '%';
+            element.appendChild(sparkle);
+
+            sparkle.animate([
+                { transform: 'scale(0) rotate(0deg)', opacity: 0 },
+                { transform: 'scale(1.5) rotate(180deg)', opacity: 1 },
+                { transform: 'scale(0) rotate(360deg)', opacity: 0 }
+            ], {
+                duration: 1000,
+                easing: 'ease-out'
+            }).onfinish = () => sparkle.remove();
+        }
+    </script>
+</body>
+</html>
